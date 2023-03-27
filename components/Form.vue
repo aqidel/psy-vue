@@ -13,6 +13,7 @@ export default {
       email_error: null,
       phone_input: null,
       phone_error: null,
+      message_input: null,
       message_error: null
     }
   },
@@ -46,14 +47,34 @@ export default {
       }
     },
     validate_phone() {
-      //
+      if (this.$refs.form.phone.value != '' && this.$refs.form.phone.value.match(/^\+\d+$/g) == null) {
+        this.phone_error = 'Неверный номер телефона!';
+        return false;
+      }
+      else {
+        this.phone_error = null;
+        return true;
+      }
     },
     validate_message() {
-      //
+      if (this.$refs.form.message.value > 180) {
+        this.message_error = 'Не более 180 символов!';
+        return false;
+      } 
+      else {
+        this.message_error = null;
+        return true;
+      }
     },
     sendEmail() {
-      if (validate_name() && validate_email() && validate_phone() && validate_message()) {
-        emailjs.sendForm(YOUR_SERVICE_ID, YOUR_TEMPLATE_ID, this.$refs.form, YOUR_PUBLIC_KEY);
+      if (this.validate_name() && this.validate_email() && this.validate_phone() && this.validate_message()) {
+        emailjs.sendForm(YOUR_SERVICE_ID, YOUR_TEMPLATE_ID, this.$refs.form, YOUR_PUBLIC_KEY)
+          .then(() => {
+            this.name_input = null;
+            this.email_input = null;
+            this.phone_input = null;
+            this.message_input = null;
+          })
       } 
       else {
         return;
@@ -65,10 +86,11 @@ export default {
 
 <template>
   <form ref="form" @submit.prevent="sendEmail">
-    <div id="name-wrap" class="input-wrap">
+    <div class="input-wrap">
       <input 
         id="name" 
-        class="input" 
+        class="input"
+        name="name"
         type="text" 
         v-model="name_input">
       <label 
@@ -78,10 +100,11 @@ export default {
       </label>
       <small>{{ name_error }}</small>
     </div>
-    <div id="email-wrap" class="input-wrap">
+    <div class="input-wrap">
       <input 
         id="email" 
         class="input" 
+        name="email"
         type="text"
         v-model="email_input">
       <label 
@@ -91,10 +114,11 @@ export default {
       </label>
       <small>{{ email_error }}</small>
     </div>
-    <div id="phone-wrap" class="input-wrap">
+    <div class="input-wrap">
       <input 
         id="phone" 
         class="input" 
+        name="phone"
         type="text"
         v-model="phone_input">
       <label 
@@ -108,8 +132,10 @@ export default {
       <textarea 
         id="message" 
         class="textarea" 
+        name="message"
         placeholder="Сообщение" 
-        rows="6">
+        rows="6"
+        v-model="message_input">
       </textarea>
       <small>{{ message_error }}</small>
     </div>
@@ -176,9 +202,8 @@ label {
 small {
   margin: 0;
   font-family: OpenSans Regular, sans-serif;
-  font-size: 16px;
+  font-size: 12px;
   font-weight: 400;
-  line-height: 24px;
   color: rgb(239, 0, 0);
 }
 

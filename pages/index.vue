@@ -1,4 +1,5 @@
 <template>
+  <Header></Header>
   <main>
     <article id="get-started">
       <div class="max-width-wrap">
@@ -126,7 +127,9 @@
       </div>
     </article>
   </main>
-  <footer></footer>
+  <footer>
+    <p>© 2023 Elena Rudenko | Created by Aqidel</p>
+  </footer>
 </template>
 
 <style>
@@ -342,6 +345,21 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+footer {
+  padding: 40px 0;
+  background-color: rgb(0, 0, 0);
+}
+
+footer > p {
+  margin: 0;
+  font-family: OpenSans Regular, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  text-align: center;
+  color: rgb(150, 150, 150);
 }
 
 </style>
