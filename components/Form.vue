@@ -222,9 +222,26 @@ small {
   text-transform: uppercase;
   text-align: center;
   color: rgb(0, 0, 0);
+  cursor: pointer;
 }
 
 #submit-btn:hover {
   background-color: rgb(236, 183, 160);
+}
+
+@media screen and (min-width: 768px) {
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .input-wrap, #message-wrap {
+    width: 100%;
+  }
+
+  #submit-btn {
+    width: auto;
+  }
 }
 </style>

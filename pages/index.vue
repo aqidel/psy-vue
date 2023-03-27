@@ -362,4 +362,34 @@ footer > p {
   color: rgb(150, 150, 150);
 }
 
+@media screen and (min-width: 768px) {
+  #get-started h1 {
+    font-size: 48px;
+    line-height: 57px;
+  }
+
+  .article-h1 {
+    font-size: 38px;
+    line-height: 53px;
+  }
+
+  #art-therapy .grid-wrap, #about-me .grid-wrap, #online .grid-wrap {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 50px;
+  }
+
+  #about-me img, #online img {
+    height: auto;
+  }
+
+  #get-started > .max-width-wrap, #contact > .max-width-wrap {
+    max-width: 570px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  #art-therapy > .max-width-wrap, #about-me > .max-width-wrap, #online > .max-width-wrap {
+    max-width: 900px;
+  }
+}
 </style>
